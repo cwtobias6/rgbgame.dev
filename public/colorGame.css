@@ -5,7 +5,7 @@ body {
 
 .square {
 	width: 30%;
-	background: purple;
+	background-color: purple;
 	padding-bottom: 30%;
 	float: left;
 	margin:1.66%;
