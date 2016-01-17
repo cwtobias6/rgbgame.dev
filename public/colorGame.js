@@ -7,53 +7,46 @@ colorDisplay.textContent = pickedColor;
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
-var easyBtn = document.querySelector("#easyBtn");
-var hardBtn = document.querySelector("#hardBtn");
+var modeButtons = document.querySelectorAll(".mode");
+
+for (var i = 0; i < modeButtons.length; i++) {
+	modeButtons[i].addEventListener("click", function() {
+		modeButtons[0].classList.remove("selected");
+		modeButtons[1].classList.remove("selected");
+    	this.classList.add("selected");
+
+    	this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
 
 
-easyBtn.addEventListener("click", function() {
-	hardBtn.classList.remove("selected");
-	easyBtn.classList.add("selected");
-	numSquares = 3;
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
-	colorDisplay.textContent = pickedColor;
-	for (var i = 0; i < squares.length; i++) {
-		if(colors[i]){
-			squares[i].style.background = colors[i];
-		} else {
-			squares[i].style.display = "none";
-		}
-	};
+    	reset();
 
-});
+	});
+}
 
-hardBtn.addEventListener("click", function() {
-	easyBtn.classList.remove("selected");
-	hardBtn.classList.add("selected");
-	numSquares = 6;
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
-	colorDisplay.textContent = pickedColor;
-	for (var i = 0; i < squares.length; i++) {
-			squares[i].style.background = colors[i];
-			squares[i].style.display = "block";
-	};
-
-});
-
-//resets game if reset button is clicked
-resetButton.addEventListener("click", function() {
+function reset() {
 	colors = generateRandomColors(numSquares);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
 	messageDisplay.textContent = " ";
-	this.textContent = "New Colors";
+	resetButton.textContent = "New Colors";
+	//loop through colors array to hide colors based on easy or hard
 	for (var i = 0; i < squares.length; i++) {
-		squares[i].style.background = colors[i];
+		if(colors[i]) {
+			squares[i].style.display = "block";
+			squares[i].style.background = colors[i];
+		} else {
+			squares[i].style.display = "none";
+		}
 	}
 
 	h1.style.background = "steelblue";
+
+
+}
+
+//resets game if reset button is clicked
+resetButton.addEventListener("click", function() {
+	reset();
 
 });
 
